@@ -1,5 +1,12 @@
 .starred {
-  
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+
     footer {
         margin-top: 50px;
 
@@ -9,7 +16,7 @@
 
         .btn {
             width: auto;
-            padding: 0 20px;                   
+            padding: 0 20px;
             font-size: 0.8rem;
             background: red;
             border: none;
@@ -25,4 +32,3 @@
         }
     }
 }
-  
