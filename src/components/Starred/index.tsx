@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import starredSlice from '../../data/starredSlice';
 
 // Component and type imports
-import Movie from '../Movie'
-import { IMovie } from '../../types';
+import Movie from '../Movie';
+import { IMovie, IRootState } from '../../types';
 
 // Style imports
 import './starred.styles.scss';
@@ -19,16 +19,18 @@ interface StarredProps {
 // Component declaration
 const Starred: React.FC<StarredProps> = ({ viewTrailer }) => {
 
-  const state = useSelector((state) => state)
-  const { starred } = state
+  // Starred states
+  const { starred } = useSelector((state: IRootState) => state);
   const { clearAllStarred } = starredSlice.actions
-  const dispatch = useDispatch()
+
+  // Init hooks
+  const dispatch = useDispatch();
 
   return (
     <div className="starred" data-testid="starred">
       {starred.starredMovies.length > 0 && (<div data-testid="starred-movies" className="starred-movies">
         <h6 className="header">Starred movies</h6>
-        <div className="row">
+        <div className="grid-container">
           {starred.starredMovies.map((movie: IMovie) => (
             <Movie
               movie={movie}

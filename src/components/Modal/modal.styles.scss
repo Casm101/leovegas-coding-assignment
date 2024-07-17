@@ -1,0 +1,36 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+
+  z-index: 1000;
+
+  .modal-content {
+    position: relative;
+    padding: .5rem;
+    padding-top: 3rem;
+
+    background: #fff;
+    border-radius: .25rem;
+
+    .modal-close {
+      position: absolute;
+      top: .5rem;
+      right: .5rem;
+
+      background: none;
+      color: #000;
+
+      font-size: 2rem;
+      border: none;
+
+      cursor: pointer;
+    }
+  }
+}

@@ -1,9 +1,9 @@
 // Component imports
 import Movie from '../Movie';
-
-// Type imports
 import { IMovie } from '../../types';
 
+// Style imports
+import './moviecontainer.styles.scss';
 
 // Component props declaration
 interface MovieContainerProps {
@@ -11,19 +11,17 @@ interface MovieContainerProps {
         movies: IMovie[]
     };
     viewTrailer: (content: IMovie) => void;
-    closeCard: () => void;
 }
 
-const MovieContainer: React.FC<MovieContainerProps> = ({ movies, viewTrailer, closeCard }) => {
+const MovieContainer: React.FC<MovieContainerProps> = ({ movies, viewTrailer }) => {
     return (
-        <div data-testid="movies">
+        <div className="movies-container" data-testid="movies">
             {movies?.movies?.map((movie) => {
                 return (
                     <Movie
                         movie={movie}
                         key={movie.id}
                         viewTrailer={viewTrailer}
-                        closeCard={closeCard}
                     />
                 )
             })}

@@ -4,7 +4,7 @@ import starredSlice from '../../data/starredSlice';
 import watchLaterSlice from '../../data/watchLaterSlice';
 
 // Type imports
-import { IMovie } from '../../types';
+import { IMovie, IRootState } from '../../types';
 
 // Style imports
 import './movie.styles.scss';
@@ -16,14 +16,12 @@ import placeholder from '../../assets/not-found-placeholder.jpeg';
 interface MovieProps {
     movie: IMovie;
     viewTrailer: (content: IMovie) => void;
-    closeCard?: () => void;
 }
 
 // Component declaration
-const Movie: React.FC<MovieProps> = ({ movie, viewTrailer, closeCard }) => {
+const Movie: React.FC<MovieProps> = ({ movie, viewTrailer }) => {
 
-    const state = useSelector((state) => state);
-    const { starred, watchLater } = state;
+    const { starred, watchLater } = useSelector((state: IRootState) => state);
     const { starMovie, unstarMovie } = starredSlice.actions;
     const { addToWatchLater, removeFromWatchLater } = watchLaterSlice.actions;
 

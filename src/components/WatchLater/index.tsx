@@ -5,7 +5,7 @@ import watchLaterSlice from '../../data/watchLaterSlice';
 
 // Component and type imports
 import Movie from '../Movie';
-import { IMovie } from '../../types';
+import { IMovie, IRootState } from '../../types';
 
 // Style imports
 import './watchlater.styles.scss'
@@ -18,16 +18,19 @@ interface WatchLaterProps {
 
 const WatchLater: React.FC<WatchLaterProps> = ({ viewTrailer }) => {
 
-  const state = useSelector((state) => state);
-  const { watchLater } = state;
+  // Watchlater states
+  const { watchLater } = useSelector((state) => state as IRootState);
   const { remveAllWatchLater } = watchLaterSlice.actions;
+
+  // Init hooks
   const dispatch = useDispatch();
+
 
   return (
     <div className="watch-later" data-testid="watch-later-div">
       {watchLater.watchLaterMovies.length > 0 && (<div data-testid="watch-later-movies" className="starred-movies">
         <h6 className="header">Watch Later List</h6>
-        <div className="row">
+        <div className="grid-container">
           {watchLater.watchLaterMovies.map((movie: IMovie) => (
             <Movie
               movie={movie}

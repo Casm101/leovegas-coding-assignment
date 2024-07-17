@@ -1,7 +1,9 @@
 // Module imports
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import RootState from '../../data/store';
+
+// Type imports
+import { IRootState } from "../../types";
 
 // Style imports
 import './header.styles.scss';
@@ -21,7 +23,7 @@ interface StarredState {
 // Declaration of header component
 const Header: React.FC<HeaderProps> = ({ searchMovies }) => {
 
-  const { starredMovies } = useSelector((state: typeof RootState) => state.starred);
+  const { starredMovies } = useSelector((state: IRootState) => state.starred);
 
   return (
     <header>
