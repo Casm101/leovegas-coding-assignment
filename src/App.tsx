@@ -23,6 +23,7 @@ import { useInfiniteScroll } from './hooks/useInfiniteScroll';
 import './styles/app.scss';
 import 'reactjs-popup/dist/index.css'
 import { UnknownAction } from '@reduxjs/toolkit';
+import { useDebounce } from './hooks/useDebounce';
 
 
 // Main app declaration
@@ -51,12 +52,12 @@ const App = () => {
     }
   };
 
-  const searchMovies = (query: string) => {
+  const searchMovies = useDebounce((query: string) => {
     navigate('/');
     dispatch(resetMovies());
     setPage(1);
     getSearchResults(query);
-  };
+  }, 500);
 
   const getMovies = (page: number = 1) => {
     if (searchQuery) dispatch(fetchMovies(`${ENDPOINT_SEARCH}&query=${searchQuery}&page=${page}`) as unknown as UnknownAction);

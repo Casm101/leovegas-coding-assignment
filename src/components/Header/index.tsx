@@ -15,15 +15,10 @@ interface HeaderProps {
   searchParams: URLSearchParams;
 }
 
-// Define the shape of the Redux state
-interface StarredState {
-  starredMovies: Array<any>; // Define a precise type for the movies if possible
-}
-
 // Declaration of header component
 const Header: React.FC<HeaderProps> = ({ searchMovies }) => {
 
-  const { starredMovies } = useSelector((state: IRootState) => state.starred);
+  const { starredMovies } = useSelector((state: IRootState) => state?.starred);
 
   return (
     <header>
@@ -33,10 +28,10 @@ const Header: React.FC<HeaderProps> = ({ searchMovies }) => {
 
       <nav>
         <NavLink to="/starred" data-testid="nav-starred" className="nav-starred">
-          {starredMovies.length > 0 ? (
+          {starredMovies?.length > 0 ? (
             <>
               <i className="bi bi-star-fill bi-star-fill-white" />
-              <sup className="star-number">{starredMovies.length}</sup>
+              <sup className="star-number">{starredMovies?.length}</sup>
             </>
           ) : (
             <i className="bi bi-star" />
@@ -48,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({ searchMovies }) => {
       </nav>
 
       <div className="input-group rounded">
-        <Link to="/" onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => searchMovies(e.target.value)} className="search-link">
+        <Link to="/" onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => searchMovies((e.target as HTMLInputElement).value)} className="search-link">
           <input
             type="search"
             data-testid="search-movies"

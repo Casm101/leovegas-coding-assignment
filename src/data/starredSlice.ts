@@ -1,22 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+// Module imports
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IMovie } from "../types";
+
+interface StarredState {
+    starredMovies: IMovie[];
+}
+
+const initialState: StarredState = {
+    starredMovies: []
+};
 
 const starredSlice = createSlice({
     name: 'starred',
-    initialState: {
-        starredMovies: []
-    },
+    initialState,
     reducers: {
-        starMovie: (state, action) => {
-            state.starredMovies = [action.payload, ...state.starredMovies]
+        starMovie: (state, action: PayloadAction<IMovie>) => {
+            state.starredMovies = [action.payload, ...state.starredMovies];
         },
-        unstarMovie: (state, action) => {
-            const indexOfId = state.starredMovies.findIndex(key => key.id === action.payload.id)
-            state.starredMovies.splice(indexOfId, 1)
+        unstarMovie: (state, action: PayloadAction<{ id: string }>) => {
+            const indexOfId = state.starredMovies.findIndex(movie => movie.id === action.payload.id);
+            if (indexOfId !== -1) {
+                state.starredMovies.splice(indexOfId, 1);
+            }
         },
         clearAllStarred: (state) => {
-            state.starredMovies = []
+            state.starredMovies = [];
         },
     },
-})
+});
 
+export const { starMovie, unstarMovie, clearAllStarred } = starredSlice.actions;
 export default starredSlice;

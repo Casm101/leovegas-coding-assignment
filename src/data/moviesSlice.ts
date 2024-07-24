@@ -18,7 +18,7 @@ const initialState: MoviesState = {
     fetchStatus: 'idle',
 };
 
-export const fetchMovies = createAsyncThunk('fetch-movies', async (apiUrl: string) => {
+export const fetchMovies: any = createAsyncThunk('fetch-movies', async (apiUrl: string) => {
     const response = await fetch(apiUrl);
     return response.json();
 });
